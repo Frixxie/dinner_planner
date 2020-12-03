@@ -1,9 +1,9 @@
 dinner,type,pri
-"Carbonara",1,2
-"Fish&Chips",2,1
-"Sweetpotato&CarrotSoup",3,1
-"PizzaBianca",1,1
-"Pizza",1,1
-"Chicken&Nudles&Teriyaki",1,1
-"Steak&Fries",1,1
-"Salmon&Potato&Sourcream",2,2
+"Carbonara","regular",2
+"Fish&Chips","fish",1
+"Sweetpotato&CarrotSoup","vegan",1
+"PizzaBianca","regular",1
+"Pizza","regular",1
+"Chicken&Nudles&Teriyaki","regular",1
+"Steak&Fries","regular",1
+"Salmon&Potato&Sourcream","regular",2

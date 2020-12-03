@@ -1,13 +1,15 @@
 import csv
+import getopt
+import sys
 from random import choices
 
 class DinnerObj():
     def __init__(self, dinner, typp, pri):
-        if not self.check_args(dinner, int(pri), int(typp)):
+        if not self.check_args(dinner, int(pri), typp):
             raise Exception("Wrong type args")
         self.name = dinner
         self.pri = int(pri)
-        self.type = int(typp)
+        self.type = typp
 
     def check_args(self, dinner, pri, typp):
         """
@@ -17,7 +19,7 @@ class DinnerObj():
             return False
         if not isinstance(pri, int):
             return False
-        if not isinstance(typp, int):
+        if not isinstance(typp, str):
             return False
         return True
 
@@ -80,6 +82,31 @@ class DinnerPlanner():
             weights.append(dinner.pri)
         return weights
 
+def parse_opts():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hn:r:t")
+    except getopt.GetoptError as err:
+        print(err)
+        sys.exit(2)
+    num_days = None
+    non_repeat = None
+    typesystem = None
+    for o, a in opts:
+        if o == "-h":
+            print("will make help func soon")
+            sys.exit(1)
+        elif n == "-n":
+            num_days = int(a)
+        elif r == "-r":
+            non_repeat = int(a)
+        elif t == "-t":
+            typesystem = True
+        else:
+            assert False, "unhandled option!"
+    return num_days, non_repeat, typesystem
+
+
+            
 
 if __name__ == '__main__':
     dp = DinnerPlanner("example_dinners.csv", 1, 30, 2)
