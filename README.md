@@ -6,7 +6,7 @@ if you want to leave it to chance to plan dinner:
 python3 dinner_planner.py
 ```
 
-TODO: 
+## TODO: 
 
 * reconsider selection/reselection scheme
 * add getopt
