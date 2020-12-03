@@ -34,9 +34,29 @@ class DinnerPlanner():
 
     def plan_dinners(self):
         dinners = list()
-        for i in range(self.num_days):
+        redraws = 0
+        while len(dinners) < self.num_days:
             dinner = choices(self.dinners, self.weights, k=1)[0]
-            print(i, dinner.name)
+            if self.check_order(dinner, dinners):
+                dinners.append(dinner)
+            else:
+                redraws += 1
+        for dinner in dinners:
+            print(dinner.name)
+        print("redraws", redraws)
+
+    def check_order(self, dinner, dinners):
+        if len(dinners) < 1:
+            return True
+        idx = len(dinners) - 1
+        if len(dinners) < self.non_repeat:
+            #TODO: fix edgecase here
+            return True
+        else:
+            for i in range(self.non_repeat):
+                if dinner.name == dinners[idx - i].name:
+                    return False
+        return True
 
     def load(self, input_file, skiplines):
         """
@@ -61,5 +81,5 @@ class DinnerPlanner():
 
 
 if __name__ == '__main__':
-    dp = DinnerPlanner("example_dinners.csv", 1, 3000, 1)
+    dp = DinnerPlanner("example_dinners.csv", 1, 30, 2)
     dp.plan_dinners()
