@@ -50,8 +50,9 @@ class DinnerPlanner():
             return True
         idx = len(dinners) - 1
         if len(dinners) < self.non_repeat:
-            #TODO: fix edgecase here
-            return True
+            for other_dinner in dinners:
+                if other_dinner.name == dinner.name:
+                    return False
         else:
             for i in range(self.non_repeat):
                 if dinner.name == dinners[idx - i].name:
