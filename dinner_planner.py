@@ -40,7 +40,7 @@ class DinnerPlanner():
         while len(dinners) < self.num_days:
             dinner = choices(self.dinners, self.weights, k=1)[0]
             if self.check_order(dinner, dinners) and self.check_types(dinner, dinners):
-                dinners.append(dinner)            
+                dinners.append(dinner)
             else:
                 redraws += 1
             if len(dinners) % 7 == 0:
@@ -133,5 +133,5 @@ def parse_opts():
 
 
 if __name__ == '__main__':
-    dp = DinnerPlanner("example_dinners.csv", 1, 14, 2)
+    dp = DinnerPlanner("example_dinners.csv", 1, 30, 3)
     dp.plan_dinners()

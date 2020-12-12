@@ -6,5 +6,8 @@ dinner,type,pri
 "Pizza","regular",1
 "Chicken&Nudles&Teriyaki","regular",1
 "Steak&Fries","regular",1
-"Salmon&Potato&Sourcream","regular",2
+"Salmon&Potato&Sourcream","fish",2
 "Salad","vegan",1
+"FishCake","fish",1
+"FishBolls","fish",1
+"Chicken&Curry&Rice","regular",1
