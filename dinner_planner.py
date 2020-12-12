@@ -39,23 +39,47 @@ class DinnerPlanner():
         redraws = 0
         while len(dinners) < self.num_days:
             dinner = choices(self.dinners, self.weights, k=1)[0]
-            if self.check_order(dinner, dinners):
-                dinners.append(dinner)
+            if self.check_order(dinner, dinners) and self.check_types(dinner, dinners):
+                dinners.append(dinner)            
             else:
                 redraws += 1
+            if len(dinners) % 7 == 0:
+                if not self.check_week(dinners):
+                    for _ in range(7):
+                        dinners.pop()
         for dinner in dinners:
-            print(dinner.name)
+            print(dinner)
         print("redraws", redraws)
+
+    def check_week(self, dinners):
+        num_fish = 0
+        num_vegan = 0
+        for dinner in dinners:
+            if dinner.type == 'fish':
+                num_fish += 1
+            if dinner.type == 'vegan':
+                num_vegan += 1
+        # print(num_fish, num_vegan)
+        if num_fish >= 3 and num_vegan >= 1:
+            return True
+        return False
+
+    def check_types(self, dinner, dinners):
+        if len(dinners) < 1:
+            return True
+        elif dinner.type == dinners[len(dinners) - 1].type:
+            return False
+        return True
 
     def check_order(self, dinner, dinners):
         if len(dinners) < 1:
             return True
-        idx = len(dinners) - 1
         if len(dinners) < self.non_repeat:
             for other_dinner in dinners:
                 if other_dinner.name == dinner.name:
                     return False
         else:
+            idx = len(dinners) - 1
             for i in range(self.non_repeat):
                 if dinner.name == dinners[idx - i].name:
                     return False
@@ -106,8 +130,8 @@ def parse_opts():
     return num_days, non_repeat, typesystem
 
 
-            
+
 
 if __name__ == '__main__':
-    dp = DinnerPlanner("example_dinners.csv", 1, 30, 2)
+    dp = DinnerPlanner("example_dinners.csv", 1, 14, 2)
     dp.plan_dinners()
