@@ -4,25 +4,10 @@ import sys
 from random import choices
 
 class DinnerObj():
-    def __init__(self, dinner, typp, pri):
-        if not self.check_args(dinner, int(pri), typp):
-            raise Exception("Wrong type args")
+    def __init__(self, dinner: str, typp: str, pri: int):
         self.name = dinner
-        self.pri = int(pri)
+        self.pri = pri 
         self.type = typp
-
-    def check_args(self, dinner, pri, typp):
-        """
-        Prob need better type checking for this
-        """
-        if not isinstance(dinner, str):
-            return False
-        if not isinstance(pri, int):
-            return False
-        if not isinstance(typp, str):
-            return False
-        return True
-
 
     def __str__(self):
         return f"{self.name}, {self.type}, {self.pri}"
@@ -97,7 +82,7 @@ class DinnerPlanner():
                 if index < skiplines:
                     index += 1
                     continue
-                dinners.append(DinnerObj(row[0], row[1], row[2]))
+                dinners.append(DinnerObj(row[0], row[1], int(row[2])))
         return dinners
 
     def create_weights(self):
